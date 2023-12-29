@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mask_inventory/model/mask.dart';
 import 'package:flutter_mask_inventory/repository/mask_repository.dart';
 import 'package:flutter_mask_inventory/repository/mask_repository_impl.dart';
-import 'package:flutter_mask_inventory/ui/main/main_view_model.dart';
 
 class MainScreen extends StatelessWidget {
   final MaskRepository _maskRepository = MaskRepositoryImpl();
@@ -20,14 +19,19 @@ class MainScreen extends StatelessWidget {
             return const Center(child: CircularProgressIndicator());
           }
 
-          final List<Mask> maskList = (snapshot.data!);
+          final List<Mask> maskList = snapshot.data!;
           return ListView.builder(
             itemCount: maskList.length,
             itemBuilder: (context, index) {
               final Mask mask = maskList[index];
-              return MainViewModel(
-                mask: mask,
-                onTap: (mask) => print(mask),
+              return ListTile(
+                title: Text(mask.storeName),
+                subtitle: Text(mask.address),
+                trailing: Text(
+                  mask.remainStatus.statusText,
+                  style: TextStyle(color: mask.remainStatus.color),
+                ),
+                onTap: () => print(mask),
               );
             },
           );
