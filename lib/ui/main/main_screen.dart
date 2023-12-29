@@ -1,29 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mask_inventory/model/mask.dart';
-import 'package:flutter_mask_inventory/repository/mask_repository.dart';
-import 'package:flutter_mask_inventory/repository/mask_repository_impl.dart';
+import 'package:flutter_mask_inventory/ui/main/main_view_model.dart';
 
-class MainScreen extends StatelessWidget {
-  final MaskRepository _maskRepository = MaskRepositoryImpl();
+class MainScreen extends StatefulWidget {
 
-  MainScreen({super.key});
+  const MainScreen({super.key});
+
+  @override
+  State<MainScreen> createState() => _MainScreenState();
+}
+
+class _MainScreenState extends State<MainScreen> {
+  final MainViewModel _mainViewModel = MainViewModel();
+
+  @override
+  void initState() {
+    _mainViewModel.getMaskInventory();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('마스크 재고 관리')),
-      body: FutureBuilder(
-        future: _maskRepository.getMaskInventory(),
+      body: StreamBuilder(
+        initialData: false,
+        stream: _mainViewModel.isLoading,
         builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
+          if(snapshot.data == true) {
             return const Center(child: CircularProgressIndicator());
           }
 
-          final List<Mask> maskList = snapshot.data!;
+          final List<Mask> list = _mainViewModel.maskList;
           return ListView.builder(
-            itemCount: maskList.length,
+            itemCount: list.length,
             itemBuilder: (context, index) {
-              final Mask mask = maskList[index];
+              final Mask mask = list[index];
               return ListTile(
                 title: Text(mask.storeName),
                 subtitle: Text(mask.address),
@@ -36,7 +48,7 @@ class MainScreen extends StatelessWidget {
             },
           );
         },
-      ),
+      )
     );
   }
 }
