@@ -1,21 +1,26 @@
 import 'dart:async';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_mask_inventory/model/mask.dart';
 import 'package:flutter_mask_inventory/repository/mask_repository.dart';
-import 'package:flutter_mask_inventory/repository/mask_repository_impl.dart';
 
-class MainViewModel {
-  final MaskRepository _maskRepository = MaskRepositoryImpl();
+class MainViewModel extends ChangeNotifier {
+  final MaskRepository _maskRepository;
+
+  MainViewModel({required MaskRepository maskRepository}) : _maskRepository = maskRepository;
 
   List<Mask> _maskList = [];
   List<Mask> get maskList => List.unmodifiable(_maskList);
 
-  final StreamController<bool> _isLoading = StreamController();
-  Stream<bool> get isLoading => _isLoading.stream;
+  bool _isLoading = false;
+  bool get isLoading => _isLoading;
 
   Future<void> getMaskInventory() async {
-    _isLoading.add(true);
+    _isLoading = true;
+    notifyListeners();
+
     _maskList = await _maskRepository.getMaskInventory();
-    _isLoading.add(false);
+    _isLoading = false;
+    notifyListeners();
   }
 }
