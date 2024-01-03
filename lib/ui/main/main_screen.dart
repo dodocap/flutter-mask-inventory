@@ -20,6 +20,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<MainViewModel>();
+    final state = viewModel.state;
     return Scaffold(
       appBar: AppBar(
         title: const Text('마스크 재고 관리'),
@@ -30,12 +31,12 @@ class _MainScreenState extends State<MainScreen> {
           )
         ],
       ),
-      body: viewModel.isLoading
+      body: state.isLoading
           ? const Center(child: CircularProgressIndicator())
           : ListView.builder(
-              itemCount: viewModel.maskList.length,
+              itemCount: state.maskList.length,
               itemBuilder: (context, index) {
-                final Mask mask = viewModel.maskList[index];
+                final Mask mask = state.maskList[index];
                 return ListTile(
                   title: Text(mask.storeName),
                   subtitle: Text(mask.address),
