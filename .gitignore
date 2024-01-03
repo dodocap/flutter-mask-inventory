@@ -140,6 +140,10 @@ bin/
 gen/
 out/
 
+# Generated build_runner files
+*.g.dart
+*.freezed.dart
+
 # Gradle files
 .gradle
 

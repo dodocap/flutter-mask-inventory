@@ -1,18 +1,18 @@
 import 'package:flutter_mask_inventory/mapper/mask_mapper.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:flutter/foundation.dart';
 
-class Mask {
-  String storeName;
-  String address;
-  MaskRemainStatus remainStatus;
+part 'mask.freezed.dart';
 
-  Mask({
-    required this.storeName,
-    required this.address,
-    required this.remainStatus,
-  });
+part 'mask.g.dart';
 
-  @override
-  String toString() {
-    return 'Mask{name: $storeName, address: $address, remainStatus: $remainStatus}';
-  }
+@freezed
+class Mask with _$Mask {
+  const factory Mask({
+    required String storeName,
+    required String address,
+    required MaskRemainStatus remainStatus
+  }) = _Mask;
+
+  factory Mask.fromJson(Map<String, Object?> json) => _$MaskFromJson(json);
 }
