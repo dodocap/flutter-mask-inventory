@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mask_inventory/di/di_setup.dart';
 import 'package:flutter_mask_inventory/ui/routes.dart';
 
 void main() {
+  diSetup();
   runApp(const MyApp());
 }
 

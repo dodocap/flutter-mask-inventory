@@ -1,4 +1,4 @@
-import 'package:flutter_mask_inventory/repository/mask_repository_impl.dart';
+import 'package:flutter_mask_inventory/di/di_setup.dart';
 import 'package:flutter_mask_inventory/ui/main/main_screen.dart';
 import 'package:flutter_mask_inventory/ui/main/main_view_model.dart';
 import 'package:go_router/go_router.dart';
@@ -10,7 +10,7 @@ final routes = GoRouter(
     GoRoute(
       path: '/',
       builder: (_, __) => ChangeNotifierProvider(
-        create: (_) => MainViewModel(maskRepository: MaskRepositoryImpl()),
+        create: (_) => getIt<MainViewModel>(),
         child: const MainScreen(),
       ),
     ),

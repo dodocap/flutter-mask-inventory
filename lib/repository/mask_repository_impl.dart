@@ -6,7 +6,9 @@ import 'package:flutter_mask_inventory/model/mask.dart';
 import 'package:flutter_mask_inventory/repository/mask_repository.dart';
 
 class MaskRepositoryImpl implements MaskRepository {
-  final MaskApi _maskApi = MaskApiImpl();
+  final MaskApi _maskApi;
+
+  const MaskRepositoryImpl({required MaskApi maskApi,}) : _maskApi = maskApi;
 
   @override
   Future<List<Mask>> getMaskInventory() async {
