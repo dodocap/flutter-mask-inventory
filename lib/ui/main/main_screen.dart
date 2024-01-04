@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_mask_inventory/core/ui_event.dart';
 import 'package:flutter_mask_inventory/model/mask.dart';
 import 'package:flutter_mask_inventory/ui/main/main_view_model.dart';
 import 'package:provider/provider.dart';
@@ -11,10 +14,27 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  StreamSubscription? _uiEventSubscription;
+  
   @override
   void initState() {
-    Future.microtask(() => context.read<MainViewModel>().getMaskInventory());
+    Future.microtask(() {
+      final MainViewModel viewModel = context.read<MainViewModel>();
+      _uiEventSubscription = viewModel.eventStream.listen((event) { 
+        switch (event) {
+          case ShowSnackBar():
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(event.msg)));
+        }
+      });
+      viewModel.getMaskInventory();
+    });
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _uiEventSubscription?.cancel();
+    super.dispose();
   }
 
   @override

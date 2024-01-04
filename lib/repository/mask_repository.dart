@@ -1,5 +1,6 @@
+import 'package:flutter_mask_inventory/core/result.dart';
 import 'package:flutter_mask_inventory/model/mask.dart';
 
 abstract interface class MaskRepository {
-  Future<List<Mask>> getMaskInventory();
+  Future<Result<List<Mask>>> getMaskInventory();
 }
