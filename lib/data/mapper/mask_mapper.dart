@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mask_inventory/dto/mask_dto.dart';
-import 'package:flutter_mask_inventory/model/mask.dart';
+import 'package:flutter_mask_inventory/data/dto/mask_dto.dart';
+import 'package:flutter_mask_inventory/domain/model/mask.dart';
 
 enum MaskRemainStatus {
   plenty('plenty', '100개 이상', Colors.blue),

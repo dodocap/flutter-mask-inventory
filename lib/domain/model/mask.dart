@@ -1,4 +1,4 @@
-import 'package:flutter_mask_inventory/mapper/mask_mapper.dart';
+import 'package:flutter_mask_inventory/data/mapper/mask_mapper.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 

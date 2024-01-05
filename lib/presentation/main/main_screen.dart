@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_mask_inventory/core/ui_event.dart';
-import 'package:flutter_mask_inventory/model/mask.dart';
-import 'package:flutter_mask_inventory/ui/main/main_view_model.dart';
+import 'package:flutter_mask_inventory/domain/model/mask.dart';
+import 'package:flutter_mask_inventory/presentation/main/main_view_model.dart';
 import 'package:provider/provider.dart';
 
 class MainScreen extends StatefulWidget {

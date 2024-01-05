@@ -1,9 +1,9 @@
-import 'package:flutter_mask_inventory/api/mask_api.dart';
 import 'package:flutter_mask_inventory/core/result.dart';
-import 'package:flutter_mask_inventory/dto/mask_dto.dart';
-import 'package:flutter_mask_inventory/mapper/mask_mapper.dart';
-import 'package:flutter_mask_inventory/model/mask.dart';
-import 'package:flutter_mask_inventory/repository/mask_repository.dart';
+import 'package:flutter_mask_inventory/data/api/mask_api.dart';
+import 'package:flutter_mask_inventory/data/dto/mask_dto.dart';
+import 'package:flutter_mask_inventory/data/mapper/mask_mapper.dart';
+import 'package:flutter_mask_inventory/data/repository/mask_repository.dart';
+import 'package:flutter_mask_inventory/domain/model/mask.dart';
 
 class MaskRepositoryImpl implements MaskRepository {
   final MaskApi _maskApi;

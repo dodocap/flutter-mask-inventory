@@ -3,14 +3,14 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_mask_inventory/core/result.dart';
 import 'package:flutter_mask_inventory/core/ui_event.dart';
-import 'package:flutter_mask_inventory/model/mask.dart';
-import 'package:flutter_mask_inventory/repository/mask_repository.dart';
-import 'package:flutter_mask_inventory/ui/main/main_state.dart';
+import 'package:flutter_mask_inventory/domain/model/mask.dart';
+import 'package:flutter_mask_inventory/domain/use_case/get_mask_inventory_use_case.dart';
+import 'package:flutter_mask_inventory/presentation/main/main_state.dart';
 
 class MainViewModel extends ChangeNotifier {
-  final MaskRepository _maskRepository;
+  final GetMaskInventoryUseCase _getMaskInventoryUseCase;
 
-  MainViewModel({required MaskRepository maskRepository}) : _maskRepository = maskRepository;
+  MainViewModel({required GetMaskInventoryUseCase getMaskInventoryUseCase}) : _getMaskInventoryUseCase = getMaskInventoryUseCase;
 
   MainState _state = const MainState();
   MainState get state => _state;
@@ -22,7 +22,7 @@ class MainViewModel extends ChangeNotifier {
     _state = _state.copyWith(isLoading: true);
     notifyListeners();
 
-    final Result<List<Mask>> maskResult = await _maskRepository.getMaskInventory();
+    final Result<List<Mask>> maskResult = await _getMaskInventoryUseCase.execute();
 
     maskResult.when(
       success: (data) {

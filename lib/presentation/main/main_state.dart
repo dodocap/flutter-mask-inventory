@@ -1,4 +1,4 @@
-import 'package:flutter_mask_inventory/model/mask.dart';
+import 'package:flutter_mask_inventory/domain/model/mask.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'main_state.freezed.dart';

@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:flutter_mask_inventory/api/mask_api.dart';
 import 'package:flutter_mask_inventory/core/result.dart';
-import 'package:flutter_mask_inventory/dto/mask_dto.dart';
+import 'package:flutter_mask_inventory/data/api/mask_api.dart';
+import 'package:flutter_mask_inventory/data/dto/mask_dto.dart';
 import 'package:http/http.dart' as http;
 
 class MaskApiImpl implements MaskApi {
